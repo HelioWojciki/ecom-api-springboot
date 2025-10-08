@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Profile;
 
 import java.time.Instant;
 import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 @Profile("test")
@@ -56,6 +57,14 @@ public class TestConfig implements CommandLineRunner {
         userRepository.saveAll(Arrays.asList(u1, u2));
         orderRepository.saveAll(Arrays.asList(o1, o2, o3));
         categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
+        productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
+
+        p1.getCategories().add(cat2);
+        p2.getCategories().addAll(List.of(cat1, cat3));
+        p3.getCategories().add(cat3);
+        p4.getCategories().add(cat3);
+        p5.getCategories().add(cat2);
+
         productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
     }
 
