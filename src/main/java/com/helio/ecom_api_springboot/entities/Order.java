@@ -1,6 +1,7 @@
 package com.helio.ecom_api_springboot.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.helio.ecom_api_springboot.entities.enums.OrderStatus;
 import jakarta.persistence.*;
 
@@ -88,6 +89,14 @@ public class Order implements Serializable {
 
     public Set<OrderItem> getItems(){
         return items;
+    }
+
+    public Double getTotal(){
+        double total = 0.0;
+        for (OrderItem item : items) {
+            total += item.getSubTotal();
+        }
+        return total;
     }
 
     @Override
