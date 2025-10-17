@@ -1,10 +1,9 @@
 package com.helio.ecom_api_springboot.resources;
 
 import com.helio.ecom_api_springboot.entities.User;
-import com.helio.ecom_api_springboot.repositories.UserRepository;
 import com.helio.ecom_api_springboot.services.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -32,7 +31,9 @@ public class UserResource {
     }
 
     @PostMapping
-    public ResponseEntity<User> insert(@RequestBody User obj){
+    public ResponseEntity<User> insert(@RequestBody User obj, HttpServletRequest request){
+        System.out.println("Recebido método HTTP: " + request.getMethod());
+        System.out.println("JSON recebido: " + obj);
         obj = service.insert(obj);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
